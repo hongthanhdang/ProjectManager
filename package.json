@@ -1,0 +1,19 @@
+{
+  "name": "project-manager",
+  "version": "1.0.0",
+  "description": "Manage profect in a outsource company",
+  "main": "index.js",
+  "scripts": {
+    "test": "node-dev express-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hongthanhdang/ProjectManager.git"
+  },
+  "author": "Thanh Dang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hongthanhdang/ProjectManager/issues"
+  },
+  "homepage": "https://github.com/hongthanhdang/ProjectManager#readme"
+}
