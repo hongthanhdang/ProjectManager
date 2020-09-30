@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const StaffSchema=mongoose.Schema({
+const ProjectSchema=mongoose.Schema({
     projectCode:{
         type:String
     },
@@ -19,4 +19,4 @@ const StaffSchema=mongoose.Schema({
         type:[String],
     }
 })
-module.exports=mongoose.model('Staff',StaffSchema)
+module.exports=mongoose.model('Project',ProjectSchema)

@@ -1,15 +1,21 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 const SALT_WORK_FACTOR = 10
 const ProjectManagerSchema = mongoose.Schema({
     userName: {
         type: String,
+        unique: true,
         required: true
     },
-    email:{
+    email: {
         // check email
         type: String,
-        required:true
+        unique: true,
+        required: true
+    },
+    status: {
+        type: String,
+        default: 'active',
     },
     password: String,
     firstName: String,
@@ -24,16 +30,16 @@ const ProjectManagerSchema = mongoose.Schema({
         default: Date.now
     }
 });
+
+
 // Hash password 
-UserSchema.pre('save', async function save(next){
+ProjectManagerSchema.pre('save', async function save(next) {
     console.log(this)
     if (!this.isModified('password')) {
-        console.log('aaaaa')
         return next()
     }
     try {
         const salt = await bcrypt.genSalt(SALT_WORK_FACTOR)
-        // console.log(salt)
         this.password = await bcrypt.hash(this.password, salt)
         return next()
     } catch (error) {
@@ -41,9 +47,8 @@ UserSchema.pre('save', async function save(next){
     }
 })
 // Compare password
-UserSchema.methods.comparePassword = async function(candidatePassword) {
-    let validPass= await bcrypt.compare(candidatePassword,this.password)
+ProjectManagerSchema.methods.comparePassword = async function (candidatePassword) {
+    let validPass = await bcrypt.compare(candidatePassword, this.password)
     return validPass
 };
-
-module.exports = mongoose.model('ProjectManager', ProjectManagerSchema)
+export const ProjectManager=mongoose.model('ProjectManager',ProjectManagerSchema)
