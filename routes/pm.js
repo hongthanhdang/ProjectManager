@@ -3,7 +3,7 @@ import {login, signup} from '../controllers/pm/pmAPI.js'
 const router= express.Router()
 
 // log in
-router.get('/pm/login',login)
+router.post('/pm/login',login)
 
 // sign up
 router.post('/pm/signup',signup)

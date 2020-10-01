@@ -1,18 +1,18 @@
-const mongoose = require('mongoose')
-const ProjectTypeSchema=mongoose.Schema({
-    projectTypeCode:{
-        type:String,
-        required:true
+import mongoose from 'mongoose'
+const ProjectTypeSchema = mongoose.Schema({
+    projectTypeCode: {
+        type: String,
+        required: true
     },
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    priority:{
-        type:Number
+    priority: {
+        type: Number
     },
-    status:{
-        type:String,
+    status: {
+        type: String,
     }
 })
-module.exports=mongoose.model("ProjectType",ProjectTypeSchema)
+export const ProjectType = mongoose.model("ProjectType", ProjectTypeSchema)

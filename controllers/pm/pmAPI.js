@@ -3,8 +3,7 @@ import { loginPM, createPM } from './pmController.js';
 const login = async (req, res) => {
     const requiredFields = [
         { 'key': 'userName', 'type': 'string' },
-        { 'key': 'password', 'type': 'string' },
-        { 'key': 'email', 'type': 'string' },
+        { 'key': 'password', 'type': 'string' }
     ];
     console.log(req.body)
     // check require fields
@@ -38,6 +37,7 @@ const signup = async (req, res) => {
     const requiredFields = [
         { 'key': 'userName', 'type': 'string' },
         { 'key': 'password', 'type': 'string' },
+        { 'key': 'email', 'type': 'string' }
     ];
     // check required fields
     for (let field of requiredFields) {

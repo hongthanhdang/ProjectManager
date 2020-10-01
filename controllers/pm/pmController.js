@@ -13,10 +13,9 @@ const loginPM = async (req) => {
                 error: true,
             };
         }
-        const result = await ProjectManager.verifyPassword(pm.password, data.password);
+        const result = await pm.verifyPassword(data.password);
         if (result) {
             const token = await generateToken(result.message, expiredTime);
-
             return {
                 status: 200,
                 code: 'TOKEN_GENERATE_SUCCESS',
@@ -24,13 +23,15 @@ const loginPM = async (req) => {
                 data: token,
             };
         }
-
-        return {
-            status: 203,
-            code: 'TOKEN_GENERATE_FAILED',
-            error: true,
-            message: result.message,
-        };
+        else{
+            return {
+                status: 203,
+                code: 'USER_NAME_OR_PASSWORD_INCORRECT',
+                error: true,
+                message: "Username or password incorrect",
+            };
+        }
+        
     } catch (err) {
         logger(`loginPM ${err}`);
         return {
@@ -45,18 +46,11 @@ const createPM = async (req,res) => {
     const data = req.body;
     try {
         const pm = await ProjectManager.findOne({ userName: data.userName });
-        if (pm) {
+        const pm1 = await ProjectManager.findOne({ email: data.email });
+        if (pm||pm1) {
             return res.status(404).json({
                 status: 404,
-                code: 'USER_NAME_EXISTED',
-                error: true,
-            });
-        }
-        const pm1 = await ProjectManager.findOne({ userName: data.email });
-        if (pm1) {
-            return res.status(500).json({
-                status: 500,
-                code: 'EMAIL_EXISTED',
+                code: 'USER_NAME_OR_EMAIL_EXISTED',
                 error: true,
             });
         }

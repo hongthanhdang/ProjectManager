@@ -47,7 +47,7 @@ ProjectManagerSchema.pre('save', async function save(next) {
     }
 })
 // Compare password
-ProjectManagerSchema.methods.comparePassword = async function (candidatePassword) {
+ProjectManagerSchema.methods.verifyPassword = async function (candidatePassword) {
     let validPass = await bcrypt.compare(candidatePassword, this.password)
     return validPass
 };

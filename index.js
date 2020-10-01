@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import pm from './routes/pm.js';
-
+import projectType from './routes/projectType.js'
 dotenv.config({
     path: '.env',
 });
@@ -19,7 +19,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
 // Middleware
 app.use(bodyParser.json());
 
-app.use('/api', [pm]) // handle operating on user
+app.use('/api', [pm,projectType]) // handle operating on user
 
 // start app
 const server = app.listen(process.env.PORT, function () {
